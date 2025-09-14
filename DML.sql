@@ -79,7 +79,7 @@ select first_name,last_name,address from Admin where last_name like 'D%' interse
 
 select first_name,last_name,address from Admin where last_name like 'D%' except select first_name,last_name,address from Admin where last_name like '%v%';
 
---With clause
+--with clause
 
 with max_price(val) as (select max(transaction_amount) from Transaction) 
 select id,val from Transaction,max_price where Transaction.transaction_amount = max_price.val;
@@ -96,7 +96,7 @@ select sum(transaction_amount) from Transaction;
 
 select max(transaction_amount) from Transaction;
 
---Group by and Having
+--group by and having
 
 select transaction_id,avg(transaction_amount) as avg_transaction from Transaction group by transaction_id;
 
@@ -112,7 +112,7 @@ SELECT id,first_name,last_name,gender,email FROM Users WHERE last_name LIKE 'S%'
 SELECT id,first_name,last_name,gender,email FROM Users WHERE last_name LIKE '%w%';
 SELECT id,first_name,last_name,gender,email FROM Users WHERE last_name LIKE '%r';
 
---Join operation
+--join operation
 
 select trans_type,transaction_amount from Transaction join Transaction_type on Transaction.transaction_id = Transaction_type.id;
 

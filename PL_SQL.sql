@@ -1,3 +1,4 @@
+--SELECT into Variables
 set serveroutput on
 declare 
 id Transaction.id%type;
@@ -127,7 +128,7 @@ END;
 /
 
 --Procedure
-CREATE OR REPLACE PROCEDURE proc2(
+CREATE OR REPLACE PROCEDURE find_user(
   var1 IN NUMBER,
   var2 OUT VARCHAR2
 )
@@ -146,15 +147,15 @@ res_no Reservation.id%type:=6;
 user_name Users.first_name%type;
 extra number;
 begin
-proc2(res_no,user_name);
+find_user(res_no,user_name);
 end;
 /
 
-drop procedure proc2;
+drop procedure find_user;
 
 --Function
 set serveroutput on
-create or replace function fun(var1 in varchar) return varchar AS
+create or replace function get_train(var1 in varchar) return varchar AS
 value Train_Ticket.train_name%type;
 begin
   select train_name into value from Train_Ticket where id=var1; 
@@ -166,12 +167,12 @@ set serveroutput on
 declare 
 value varchar(20);
 begin
-value:=fun(5);
+value:=get_train(5);
 DBMS_OUTPUT.PUT_LINE('Train Name is: ' || value);
 end;
 /
 
-drop function fun;
+drop function get_train;
 
 
 ------------------------------------------------------xxxxxxxxx------------------------------------------------------------
